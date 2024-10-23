@@ -5,19 +5,15 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-        prefixSum = {0: 1}
-        currentSum = 0
-        count = 0
-        
-        for num in nums:
-            currentSum += num
-            
-            if currentSum - k in prefixSum:
-                count += prefixSum[currentSum - k]
-            
-            if currentSum in prefixSum:
-                prefixSum[currentSum] += 1
+        count=0
+        prefixSum=0
+        sumFreq={0:1}
+        for i in range(len(nums)):
+            prefixSum+=nums[i]
+            if prefixSum-k in sumFreq:
+                count+=sumFreq[prefixSum-k]
+            if prefixSum in sumFreq:
+                sumFreq[prefixSum]+=1
             else:
-                prefixSum[currentSum] = 1
-        
+                sumFreq[prefixSum]=1
         return count
